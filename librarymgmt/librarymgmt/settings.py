@@ -17,7 +17,7 @@ from dotenv import dotenv_values
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # dotenv values
-config = dotenv_values(Path.joinpath(BASE_DIR, '.env'))
+config = dotenv_values()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'librarymgmt.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config['DB_NAME'],
+        'USER': config['DB_USER'],
+        'PASSWORD': config['DB_PASSWORD'],
+        'HOST': config['DB_HOST'],
+        'PORT': config['DB_PORT']
     }
 }
 
